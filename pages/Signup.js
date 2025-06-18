@@ -4,7 +4,7 @@ import { View, Text, Button, TextInput } from 'react-native';
 import styles from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/action';
+import { login } from '../redux/AuthSlice';
 import Home from './Home';
 
 
@@ -17,7 +17,7 @@ const Signup = ({ navigation }) => {
   
   
         const handlelogin = () =>{
-  dispatch(loginUser(email, password));
+  dispatch(login({email, password}));
       navigation.navigate('Home');
   
   }  

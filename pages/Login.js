@@ -10,16 +10,12 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { loginUser } from '../redux/action';
-
-
 import Home from './Home';
 import Signup from './Signup';
+import styles from './styles';
+import { login } from '../redux/AuthSlice'; 
 
-import { addEmail } from '../redux/action'; // Adjust the path as necessary
 
-
-import styles from './styles'; // Ensure this file exists
 
 const Login = ({ navigation}) => {
 
@@ -35,7 +31,7 @@ const dispatch = useDispatch();
 
 
       const handlelogin = () =>{
-dispatch(loginUser(email, password));
+dispatch(login({email, password}));
     navigation.navigate('Home');
 
 }      
