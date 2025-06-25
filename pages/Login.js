@@ -15,6 +15,10 @@ import Signup from './Signup';
 import styles from './styles';
 import { login } from '../redux/AuthSlice'; 
 
+import { getAuth,signInWithEmailAndPassword } from '@react-native-firebase/auth';
+import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
+
 
 
 const Login = ({ navigation}) => {
@@ -30,11 +34,26 @@ const Login = ({ navigation}) => {
 const dispatch = useDispatch();
 
 
-      const handlelogin = () =>{
-dispatch(login({email, password}));
-    navigation.navigate('Home');
+      
+    const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please enter email and password');
+      return;
+    }
 
-}      
+    try {
+      const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
+      const user = userCredential.user;
+      console.log('Logged in as:', user.email);
+      navigation.navigate('Home');
+      dispatch(login({email, password}));
+    } catch (error) {
+      console.log('Login error:', error.code, error.message);
+      Alert.alert('Login Failed', error.message);
+    } 
+  };
+
+   
       // setEmailDetails(updatedArray);
       // navigation.navigate('Home', {
       //   Useremail: email,
@@ -73,7 +92,7 @@ dispatch(login({email, password}));
           
     
 
-        <TouchableOpacity style={styles.button} onPress={handlelogin}>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity 
