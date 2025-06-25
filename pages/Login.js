@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { use } from 'react';
+import { useNavigation,NavigationContainer } from '@react-navigation/native';
 import {
   Text,
   TextInput,
@@ -9,7 +9,8 @@ import {
   StyleSheet
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import {useState, useEffect } from 'react';
+
 import Home from './Home';
 import Signup from './Signup';
 import styles from './styles';
@@ -18,6 +19,7 @@ import { login } from '../redux/AuthSlice';
 import { getAuth,signInWithEmailAndPassword } from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
+
 
 
 
@@ -61,6 +63,14 @@ const dispatch = useDispatch();
       //   emailDetails: updatedArray,
         
       // });
+
+   
+
+
+
+
+
+
     
   
 
